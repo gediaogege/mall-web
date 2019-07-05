@@ -31,13 +31,32 @@ export const constantRouterMap = [
         name: 'wxmenu',
         component: () => import('@/views/wx/wxmenu'),
         meta: {title: '菜单设置'}
-      },
+      }
+    ]
+  },
+  {
+    path: '/user',
+    component: Layout,
+    redirect: '/user/admin',
+    name:'user',
+    meta: {title: '账户管理'},
+    children: [
       {
-        path: 'index',
-        name: 'index',
-        component: () => import('@/views/wx/index'),
-        meta: {title: 'hello', icon: 'hello'}
-      },
+        path: 'admin',
+        name: 'admin',
+        component: () => import('@/views/user/admin'),
+        meta: {title: '账户管理'}
+      },{
+        path: 'role',
+        name: 'role',
+        component: () => import('@/views/user/role'),
+        meta: {title: '角色管理'}
+      },{
+        path: 'permission',
+        name: 'permission',
+        component: () => import('@/views/user/permission'),
+        meta: {title: '权限管理'}
+      }
     ]
   },
 ]

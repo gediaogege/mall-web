@@ -136,7 +136,6 @@
     createWxMenu
   } from '@/api/wxmenu'
   import moment from 'moment'
-
   inject :['reload']
 
   export default {

@@ -46,10 +46,19 @@
 
           </el-submenu>
 
-          <el-menu-item index="2" route="/wx/index">
-            <i class="el-icon-menu"></i>
-            <span slot="title">导航二</span>
-          </el-menu-item>
+
+          <el-submenu index="3">
+
+            <template slot="title">
+              <i class="el-icon-user"></i>
+              <span>系统设置</span>
+            </template>
+
+            <el-menu-item index="3-1" route="/user/admin">账号管理</el-menu-item>
+            <el-menu-item index="3-2" route="/user/role">角色管理</el-menu-item>
+            <el-menu-item index="3-3" route="/user/permission">权限管理</el-menu-item>
+
+          </el-submenu>
           <el-menu-item index="3">
             <i class="el-icon-document"></i>
             <span slot="title">导航三</span>
