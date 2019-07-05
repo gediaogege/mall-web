@@ -7,7 +7,7 @@ import store from './store'//使用vuex
 import ElementUI from 'element-ui'//使用element-ui
 import locale from 'element-ui/lib/locale/lang/zh-CN'
 import uicss from 'element-ui/lib/theme-chalk/index.css'
-
+import '@/permission'
 Vue.config.productionTip = false
 Vue.use(ElementUI,{locale,uicss})
 /* eslint-disable no-new */

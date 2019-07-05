@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="text-align: center">
     <el-container>
       <el-main>
         <h2>Mall系统登录</h2>
@@ -15,7 +15,7 @@
             </el-form-item>
             <div class="login-btn">
               <el-row>
-                <el-button type="primary" :loading="loading" round=true size="mini" @click="omSubmit">登录</el-button>
+                <el-button type="primary" :loading="loading"  size="mini" @click="omSubmit">登录</el-button>
               </el-row>
             </div>
           </el-form>
@@ -57,12 +57,13 @@
       omSubmit() {
         this.$refs.loginForm.validate(validate => {
           if (validate) {
-            //this.loading = true;
-            this.$store.dispatch("Login", this.loginForm).then(function () {
+            this.loading = true;
+            this.$store.dispatch("Login", this.loginForm).then(()=> {
+              this.loading = false;
               //登录成功跳转到主页
               this.$router.push({path: '/'})
-            }).catch(function (error) {
-              console.log(error)
+            }).catch( ()=> {
+              this.loading = false;
               //alert("登录失败")
             })
           } else {
