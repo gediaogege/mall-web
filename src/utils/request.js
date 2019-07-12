@@ -22,29 +22,36 @@ instance.interceptors.request.use(function (config) {
 
 //响应拦截
 instance.interceptors.response.use(function (resp) {
-  const res = resp.data
-  if (res.code != 200) {
-    // 401:未登录;
-    if (res.code === 403) {
-      MessageBox.confirm('你已被登出，可以取消继续留在该页面，或者重新登录', '确定登出', {
-        confirmButtonText: '重新登录',
-        cancelButtonText: '取消',
-        type: 'warning'
-      }).then(() => {
-        store.dispatch('FedLogOut').then(() => {
-          location.reload()// 为了重新实例化vue-router对象 避免bug
+  const res = resp.data;
+  if ( typeof res === 'string' &&res.indexOf("dataBefore") !== -1) {
+      Message({
+        message: '账户已禁用，请联系管理员',
+        type: 'error',
+        duration: 3 * 1000
+      });
+  }else {
+    if (res.code !== 200) {
+      // 401:未登录;
+      if (res.code === 403) {
+        MessageBox.confirm('你已被登出，可以取消继续留在该页面，或者重新登录', '确定登出', {
+          confirmButtonText: '重新登录',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          store.dispatch('FedLogOut').then(() => {
+            location.reload()// 为了重新实例化vue-router对象 避免bug
+          })
         })
-      })
-    }else if(res.code==401){
-      alert("未登录")
+      } else {
+        Message({
+          message: res.message,
+          type: 'error',
+          duration: 3 * 1000
+        })
+      }
+    } else {
+      return resp.data
     }
-    Message({
-      message: res.message,
-      type: 'error',
-      duration: 3 * 1000
-    })
-  } else {
-    return resp.data
   }
 
 }), function (error) {

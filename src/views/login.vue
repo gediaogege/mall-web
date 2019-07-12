@@ -15,7 +15,7 @@
             </el-form-item>
             <div class="login-btn">
               <el-row>
-                <el-button type="primary" :loading="loading"  size="mini" @click="omSubmit">登录</el-button>
+                <el-button type="primary" :loading="loading"  size="mini" @click.native.prevent="omSubmit">登录</el-button>
               </el-row>
             </div>
           </el-form>
