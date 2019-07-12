@@ -1,89 +1,94 @@
 <template>
   <div>
+    <el-card class="filter-container" shadow="never">
+      <div class="shop">
+        <span style="font-weight: 600;">店铺名称：</span>
+        <el-select v-model="shopId" placeholder="请选择店铺" @change="changeByShop">
+          <el-option
+            v-for="item in options"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value">
+          </el-option>
+        </el-select>
 
-    <div class="shop">
-      <el-select v-model="shopId" placeholder="请选择店铺" @change="changeByShop">
-        <el-option
-          v-for="item in options"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value">
-        </el-option>
-      </el-select>
-    </div>
-    <div class="comtent">
-      <div class="add-menu">
-        <el-button type="primary" @click.native.prevent="editMenu()" icon="el-icon-circle-plus">添加菜单</el-button>
-        <el-button type="success" icon="el-icon-s-promotion" @click.native.prevent="createMenu()">发布菜单</el-button>
       </div>
-      <el-table
-        :data="tableData"
-        style="width: 100%"
-        max-height="400"
-        border="true"
-      >
-        <el-table-column
-          fixed
-          prop="wxMenuName"
-          label="菜单名称"
-          width="150">
-        </el-table-column>
-        <el-table-column
-          prop="remark"
-          label="菜单排序"
-          width="120">
-        </el-table-column>
-        <el-table-column
-          prop="menuLevel"
-          label="菜单级别"
-          width="120">
-        </el-table-column>
-        <el-table-column
-          prop="menuType"
-          label="内容方式"
-          width="120">
-        </el-table-column>
-        <el-table-column
-          prop="menuLink"
-          label="链接URL"
-          width="180">
-        </el-table-column>
-        <el-table-column
-          prop="createTime"
-          label="修改时间"
-          width="200"
-          :formatter="dateFormat"
+    </el-card>
+      <el-card class="filter-container" shadow="never">
+        <div class="add-menu">
+          <el-button type="primary" @click.native.prevent="editMenu()" icon="el-icon-circle-plus">添加菜单</el-button>
+          <el-button type="success" icon="el-icon-s-promotion" @click.native.prevent="createMenu()">发布菜单</el-button>
+        </div>
+      </el-card>
+      <el-card class="filter-container" shadow="never">
+        <el-table
+          :data="tableData"
+          style="width: 100%"
+          max-height="400"
+          border="true"
         >
-        </el-table-column>
-        <el-table-column
-          prop="status"
-          label="状态"
-          width="120"
-          :formatter="statusFormat"
-        >
-        </el-table-column>
-        <el-table-column
-          fixed="right"
-          label="操作"
-          width="190">
-          <template slot-scope="scope">
-            <el-button
-              @click.native.prevent="editMenu(scope.$index, tableData)"
-              type="primary"
-              size="small" icon="el-icon-edit">
-              修改
-            </el-button>
-            <el-button
-              @click.native.prevent="deleteRow(scope.$index, tableData)"
-              type="danger"
-              size="small" icon="el-icon-delete">
-              移除
-            </el-button>
-          </template>
-        </el-table-column>
-      </el-table>
+          <el-table-column
+            fixed
+            prop="wxMenuName"
+            label="菜单名称"
+            width="150">
+          </el-table-column>
+          <el-table-column
+            prop="remark"
+            label="菜单排序"
+            width="120">
+          </el-table-column>
+          <el-table-column
+            prop="menuLevel"
+            label="菜单级别"
+            width="120">
+          </el-table-column>
+          <el-table-column
+            prop="menuType"
+            label="内容方式"
+            width="120">
+          </el-table-column>
+          <el-table-column
+            prop="menuLink"
+            label="链接URL"
+            width="180">
+          </el-table-column>
+          <el-table-column
+            prop="createTime"
+            label="修改时间"
+            width="200"
+            :formatter="dateFormat"
+          >
+          </el-table-column>
+          <el-table-column
+            prop="status"
+            label="状态"
+            width="120"
+            :formatter="statusFormat"
+          >
+          </el-table-column>
+          <el-table-column
+            fixed="right"
+            label="操作"
+            width="190">
+            <template slot-scope="scope">
+              <el-button
+                @click.native.prevent="editMenu(scope.$index, tableData)"
+                type="primary"
+                size="small" icon="el-icon-edit">
+                修改
+              </el-button>
+              <el-button
+                @click.native.prevent="deleteRow(scope.$index, tableData)"
+                type="danger"
+                size="small" icon="el-icon-delete">
+                移除
+              </el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+      </el-card>
 
-    </div>
 
     <el-dialog :title="dialogTitle" :visible.sync="dialogFormVisible">
       <el-form :model="form" ref="form" :rules="rules">
@@ -91,7 +96,8 @@
           <el-input v-model="form.wxMenuName" autocomplete="off" style="width: 250px"></el-input>
         </el-form-item>
         <el-form-item label="菜单级别" :label-width="formLabelWidth">
-          <el-select v-model="form.menuLevel" placeholder="请选择菜单级别" style="width: 250px" @change="displayParentChange">
+          <el-select v-model="form.menuLevel" placeholder="请选择菜单级别" style="width: 250px"
+                     @change="displayParentChange">
             <el-option label="一级" value=1></el-option>
             <el-option label="二级" value=2></el-option>
           </el-select>
@@ -136,6 +142,7 @@
     createWxMenu
   } from '@/api/wxmenu'
   import moment from 'moment'
+
   inject :['reload']
 
   export default {
@@ -323,23 +330,19 @@
 
 <style scoped>
   .add-menu {
-    margin-bottom: 30px;
-    margin-top: 20px;
+    /* margin-bottom: 30px;
+     margin-top: 20px;*/
   }
 
   .shop {
   }
 
   .comtent {
-    margin-top: 50px;
+    margin-top: 30px;
   }
 
-  .one {
-    background-color: aqua;
+  .filter-container {
+    margin-top: 20px;
   }
 
-  .tow {
-    background-color: bisque;
-    margin-left: 50px;
-  }
 </style>
