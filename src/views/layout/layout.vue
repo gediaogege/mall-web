@@ -59,14 +59,23 @@
             <el-menu-item index="3-3" route="/user/permission">权限管理</el-menu-item>
 
           </el-submenu>
-          <el-menu-item index="3">
+          <el-menu-item index="3" route="/cos/index">
             <i class="el-icon-document"></i>
-            <span slot="title">导航三</span>
+            <span slot="title">文件上传</span>
           </el-menu-item>
-          <el-menu-item index="4">
-            <i class="el-icon-setting"></i>
-            <span slot="title">导航四</span>
-          </el-menu-item>
+
+          <el-submenu index="4">
+
+            <template slot="title">
+              <i class="el-icon-setting"></i>
+              <span>运动统计</span>
+            </template>
+
+            <el-menu-item index="4-1" route="/tness/info">数据面板</el-menu-item>
+            <el-menu-item index="4-2" route="/tness/add">录入数据</el-menu-item>
+
+          </el-submenu>
+
 
         </el-menu>
       </el-aside>
